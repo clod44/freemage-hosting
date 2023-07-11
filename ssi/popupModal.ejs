@@ -1,0 +1,34 @@
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="./assets/logo.png" alt="Logo" height="40" class="me-2">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content goes here...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showModal(title, body) {
+        const modalTitle = document.getElementById('exampleModalLabel');
+        const modalBody = document.querySelector('.modal-body');
+        const modal = new bootstrap.Modal(document.getElementById('myModal'));
+
+        modalTitle.textContent = title;
+        modalBody.innerHTML = body;
+        modal.show();
+    }
+
+    //showModal('Custom Title', '<p>This is a custom body text.</p>');
+
+</script>

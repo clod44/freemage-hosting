@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freemage - Image Hoster</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/general.css">
+</head>
+
+<body>
+
+
+    <%- include('../ssi/popupModal.ejs') %>
+    
+    <%- include('../ssi/navbar.ejs') %>
+
+
+
+
+        <main class="bg-white">
+            <div class="container text-center p-5">
+                <div>
+                    <h2>Upload and Host Images for free!</h2>
+                    <p class="lead">Share your image with a click of a button. All uploaded images will be deleted after
+                        24
+                        hours.
+                    </p>
+                </div>
+                <form id="upload-form" action="/api/upload" method="POST" enctype='multipart/form-data'>
+                    <input type="hidden" name="r" value="/extraDataStringHere/" />
+                    <div class="form-group">
+                        <img id="upload-source" name="image" src="./assets/placeholder.jpg"
+                            class="rounded form-control border-0 overflow-hidden"
+                            style="height: 50vh; width: 100%; object-fit: contain;">
+                    </div>
+                    <div class="form-group input-group">
+                        <input name="file" class="form-control form-control-lg border-primary" id="select-image"
+                            type="file" accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG">
+                        <button type="submit" class="btn btn-outline-primary">Upload</button>
+                    </div>
+                    <p class="text-muted small disabled">Exif data will be removed in client-side</p>
+                </form>
+            </div>
+        </main>
+
+
+        <%- include('../ssi/footer.ejs') %>
+
+
+            <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="js/piexif.js"></script>
+            <script src="js/index.js"></script>
+</body>
+
+</html>
