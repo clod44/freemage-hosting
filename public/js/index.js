@@ -113,5 +113,50 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('beforeunload', () => {
         fileInput.value = '';
     });
+
+    //show disclaimer
+    const disclaimerNote = `
+        <div class="container">
+        <div class="alert alert-warning">
+        <h5>Disclaimer:</h5>
+        <p>Welcome to Freemage Hosting, a free image hosting service. Please read this disclaimer carefully before using our platform. By using our service, you agree to the terms and conditions outlined in this disclaimer.</p>
+    
+        <ol>
+            <li>
+            <strong>Practice Project:</strong>
+            <p>Freemage Hosting is a practice project and should not be used for commercial purposes. The service provided here is intended for educational and learning purposes only. We do not guarantee the availability, reliability, or functionality of the service as it may be subject to periodic changes, updates, or discontinuation without prior notice.</p>
+            </li>
+            <li>
+            <strong>No Reliance:</strong>
+            <p>Please note that you should not rely on Freemage Hosting as your primary or sole image hosting solution. While we strive to provide a reliable service, there may be instances where the service experiences downtime, resets image databases, or provides unexpected results. We do not assume any responsibility or liability for the loss, damage, or inconvenience caused by such occurrences.</p>
+            </li>
+            <li>
+            <strong>Use at Your Own Risk:</strong>
+            <p>By using Freemage Hosting, you acknowledge and accept that you are using the service at your own risk. We do not make any warranties or representations regarding the suitability, accuracy, or completeness of the service for your specific needs. We disclaim any liability for any errors, inaccuracies, or omissions in the service, and you agree to use the service solely at your own discretion.</p>
+            </li>
+            <li>
+            <strong>User Responsibility:</strong>
+            <p>As a user of Freemage Hosting, you are solely responsible for the images you upload and share through the service. You must ensure that you have the necessary rights, permissions, and consent to use, publish, and distribute the images. We do not assume any responsibility or liability for any copyright infringement, unauthorized use, or misuse of the images uploaded by users.</p>
+            </li>
+            <li>
+            <strong>Changes to Service:</strong>
+            <p>We reserve the right to modify, suspend, or terminate the service, including any features, functionality, or policies, at any time without prior notice. We are not obligated to provide any specific updates, enhancements, or ongoing support for the service.</p>
+            </li>
+            <li>
+            <strong>Third-Party Content:</strong>
+            <p>Freemage Hosting may contain links to third-party websites, services, or content. We do not endorse or assume any responsibility for the accuracy, legality, or appropriateness of the content provided by third parties. Your interactions with third-party websites or services are subject to their respective terms and policies, and we encourage you to review them before engaging with any third-party content.</p>
+            </li>
+        </ol>
+    
+        <p>By using Freemage Hosting, you agree to release and hold harmless Freemage Hosting and its owners, administrators, and affiliates from any claims, damages, liabilities, or losses arising out of or in connection with your use of the service.</p>
+    
+        <p>If you do not agree with any part of this disclaimer, please refrain from using Freemage Hosting.</p>
+    
+        <p>Thank you for using Freemage Hosting!</p>
+    
+        </div>
+    </div>
+    `
+    showToast('Disclaimer', disclaimerNote);
 });
 
