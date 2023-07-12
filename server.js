@@ -34,7 +34,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on('connection', (socket) => {
-    console.log('A client has connected');
+    //console.log('A client has connected');
 
     // Emit the image count to the client
     //know the fucking difference
@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
 
     // Handle socket disconnect
     socket.on('disconnect', () => {
-        console.log('A client has disconnected');
+        //console.log('A client has disconnected');
     });
 });
 
