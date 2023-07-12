@@ -1,8 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('select-image');
+    const submitBtn = document.getElementById('submit-btn');
     const imageElement = document.getElementById('upload-source');
     const form = document.getElementById('upload-form');
+    let alreadyUploading = false
 
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
@@ -36,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
+        if(alreadyUploading){   //just in case
+            showModal("Please Wait", "Please wait until the previous upload is completed")
+            return
+        }
+        alreadyUploading = true
 
         // Check if a file is selected
         if (!fileInput.files || fileInput.files.length === 0) {
@@ -49,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.open('POST', '/api/upload');
         // Track the progress of the upload
         xhr.upload.addEventListener('progress', function (event) {
+            fileInput.disabled = true
+            submitBtn.disabled = true
             if (event.lengthComputable) {
                 const progress = (event.loaded / event.total) * 100;
                 updateLoadingBarProgress(progress);
@@ -60,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (xhr.getResponseHeader('Content-Type').indexOf('application/json') !== -1) {
                         const response = JSON.parse(xhr.responseText);
                         if (response.redirectUrl) {
-                            window.location.href = response.redirectUrl;
+                            //window.location.href = response.redirectUrl;
                         } else {
                             console.error('Missing redirect URL in the response');
                         }
@@ -74,6 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert(errorMessage);
                 }
             }
+            updateLoadingBarProgress(0)
+            alreadyUploading = false
         };
 
         const formData = new FormData(form);
