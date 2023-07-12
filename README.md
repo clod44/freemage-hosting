@@ -41,6 +41,9 @@ Users can upload their image files to this service and use the generated unique 
 ## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
   <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
 
+## Known Bugs
+ - Rotated images at file picking especially in apple devices. possibly caused by deletion of exif data.
+
 ### ToDo
  - [ ] Find a reason to use a lightweight local database
     - but i really liked the idea of not worrying about data losses when updating, restarting or straight up deleting the local repo 🥹
