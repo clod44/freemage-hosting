@@ -47,3 +47,10 @@ Users can upload their image files to this service and use the generated unique 
 ### ToDo
  - [ ] Find a reason to use a lightweight local database
     - but i really liked the idea of not worrying about data losses when updating, restarting or straight up deleting the local repo 🥹
+ - [ ] convert to Typescript and take advantage of its abilities instead of writing plain js in .ts file like the last time 💀
+ - [ ] Use validators like ZOD for conveinence
+ - [ ] Image Upload rate per session
+ - [ ] Image access rate per session
+ - [ ] Max image upload size
+ - [ ] remove exif data in server too
+ - [ ] use fetch api for post request with a library like axios to show upload progress
