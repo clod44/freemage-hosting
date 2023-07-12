@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
+
     const fileInput = document.getElementById('select-image');
     const submitBtn = document.getElementById('submit-btn');
     const imageElement = document.getElementById('upload-source');
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        if(alreadyUploading){   //just in case
+        if (alreadyUploading) {   //just in case
             showModal("Please Wait", "Please wait until the previous upload is completed")
             return
         }
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (xhr.getResponseHeader('Content-Type').indexOf('application/json') !== -1) {
                         const response = JSON.parse(xhr.responseText);
                         if (response.redirectUrl) {
-                            //window.location.href = response.redirectUrl;
+                            window.location.href = response.redirectUrl;
                         } else {
                             console.error('Missing redirect URL in the response');
                         }
@@ -113,6 +114,14 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('beforeunload', () => {
         fileInput.value = '';
     });
+
+
+    const socket = io(); // Connect to the server
+    const uploadedImageCountDom = document.getElementById("uploaded-image-count")
+    socket.on('uploadedImageCount', (count) => {
+        uploadedImageCountDom.textContent = count
+    });
+
 
     //show disclaimer
     const disclaimerNote = `

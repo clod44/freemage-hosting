@@ -1,0 +1,54 @@
+<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3">
+    <!-- Existing toast element -->
+    <div class="toast" data-bs-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="./assets/logo.png" style="width: 2em; height: 2em; object-fit: contain;" class="rounded me-2" alt="...">
+            <strong class="me-auto text-primary">Bootstrap</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="
+        max-height: 70vh; ;overflow-y: auto;">
+            See? Just like this.
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function showToast(title, description) {
+        const toastContainer = document.getElementById('toast-container');
+        const existingToast = document.querySelector('.toast');
+
+        // Clone the existing toast element
+        const toastElement = existingToast.cloneNode(true);
+
+        // Update the toast content
+        const toastTitleElement = toastElement.querySelector('.toast-header strong');
+        const toastTimeElement = toastElement.querySelector('.toast-header small');
+        const toastBodyElement = toastElement.querySelector('.toast-body');
+
+        // Set the title, description, and timestamp
+        toastTitleElement.textContent = title;
+        toastBodyElement.innerHTML = description;
+        toastTimeElement.textContent = getTimeStamp();
+
+        // Append the toast element to the toast container
+        toastContainer.appendChild(toastElement);
+
+        // Create a new instance of the toast and show it
+        const toastInstance = new bootstrap.Toast(toastElement);
+        toastInstance.show();
+    }
+
+    function getTimeStamp() {
+        const now = new Date();
+        const options = { hour: 'numeric', minute: 'numeric' };
+        return now.toLocaleString('en-US', options);
+    }
+    // Example usage
+    //showToast('New Message', 'You have received a new message.');
+
+
+</script>

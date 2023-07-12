@@ -10,6 +10,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
+    background-image: url("../assets/bg.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
 * {
@@ -23,3 +27,4 @@ main {
 .footer {
     flex-shrink: 0;
 }
+
