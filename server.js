@@ -1,6 +1,8 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
+const socketio = require('socket.io');
+const http = require('http');
 const multer = require('multer');
 const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
@@ -15,7 +17,36 @@ const speedLimiter = slowDown({
     delayMs,
 });
 
+function getUploadedImages() {
+    const directoryPath = path.join(__dirname, 'uploads')
+    try {
+        const files = fs.readdirSync(directoryPath);
+        return files.length;
+    } catch (error) {
+        console.error('Error reading directory:', error);
+        return 0;
+    }
+}
+let uploadedImageCount = getUploadedImages()
+
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+io.on('connection', (socket) => {
+    console.log('A client has connected');
+
+    // Emit the image count to the client
+    //know the fucking difference
+    //here we are only sending to the current connected client
+    //in the upload endpoint, we are sending to every client with "io.emit()"
+    socket.emit('uploadedImageCount', uploadedImageCount);
+
+    // Handle socket disconnect
+    socket.on('disconnect', () => {
+        console.log('A client has disconnected');
+    });
+});
 
 app.set('views', path.join(__dirname, 'ssi'));
 app.set('view engine', 'ejs');
@@ -52,7 +83,7 @@ connectToMongoDB();
 app.use(express.static('public'));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
     console.log(`Server upload speed is ${uploadSpeedLimit}kbps`);
 });
@@ -63,6 +94,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about'); // Render the about.ejs view
 });
+
 
 app.post('/api/upload', speedLimiter, upload.single('file'), async (req, res) => {
     if (!req.file) {
@@ -91,6 +123,8 @@ app.post('/api/upload', speedLimiter, upload.single('file'), async (req, res) =>
     try {
         await collection.insertOne(mappingData);
         console.log('Mapping data stored in MongoDB');
+        uploadedImageCount++;
+        io.emit('uploadedImageCount', uploadedImageCount);
     } catch (err) {
         console.log('Error storing mapping in MongoDB:', err);
     }
@@ -147,3 +181,5 @@ app.get('/image/:filename', async (req, res) => {
 app.get('*', (req, res) => {    //this needs to be placed after all other endpoint initilaizations
     res.status(404).render('pageNotFound');
 });
+
+
