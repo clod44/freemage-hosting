@@ -13,6 +13,7 @@ Users can upload their image files to this service and use the generated unique 
  - generated link can be used to embed images
  - <img src="http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg" height=64px alt="embedded image. if you are seeing this that means my test server is down">
  - Image's exif data(jpg exif) is removed on client side before uploading process starts
+ - Uploaded images DO NOT gets deleted after 24 hours. i didn't implement it and forgor to change the frontend 💀
 ## Major Depencies
  - [x] express
  - [X] nodejs
