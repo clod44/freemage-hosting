@@ -4,14 +4,21 @@
   <p align="center">Free image Hosting Service</p>
 </p>
 
-
 <hr>
 
+## What does it do
+Users can upload their image files to this service and use the generated unique url to access the raw image file later on:
+ - `<websiteurl>/image/<generated image name>.<image format>`
+ - [http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg)
+ - generated link can be used to embed images
+ - <img src="http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg" height=64px>
+ - Image's exif data(jpg exif) is removed on client side before uploading process starts
 ## Major Depencies
  - [x] express
  - [X] nodejs
  - [X] mongodb - image information storing
  - [X] multer - image uploading
+ - [X] piexif - exif manipulation 
  - and others in `package.json`  
 ## Host your own
  - `git clone https://github.com/clod44/freemage-hosting/`
@@ -33,3 +40,6 @@
 ## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
   <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
 
+### ToDo
+ - [ ] Find a reason to use a lightweight local database
+    - but i really liked the idea of not worrying about data losses when updating, restarting or straight up deleting the local repo 🥹
