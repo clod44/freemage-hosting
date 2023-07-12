@@ -31,4 +31,5 @@
    - run `pm2 examples` for a general understanding of pm2
 
 ## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
-![screenshot of the website](https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true)
+  <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
+
