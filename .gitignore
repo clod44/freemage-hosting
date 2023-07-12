@@ -2,6 +2,6 @@
 #Set-Content .gitignore -Encoding Ascii -Value (Get-Content .gitignore)
 
 node_modules/
-keymaster2.pem
+freemage-hosting.pem
 uploads/
 .env
