@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         reader.onload = (e) => {
             const cleanImage = isJpegOrJpg(file.name) ? piexif.remove(e.target.result) : e.target.result;
             imageElement.src = cleanImage;
+            updateLoadingBarProgress(0);
         };
         reader.readAsDataURL(file);
     });
@@ -39,13 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if a file is selected
         if (!fileInput.files || fileInput.files.length === 0) {
             alert('Please select an image file.');
-            
+
             showModal('Missing file', '<p>Please Select an image file</p>');
             return;
         }
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/api/upload');
+        // Track the progress of the upload
+        xhr.upload.addEventListener('progress', function (event) {
+            if (event.lengthComputable) {
+                const progress = (event.loaded / event.total) * 100;
+                updateLoadingBarProgress(progress);
+            }
+        });
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -70,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const formData = new FormData(form);
         formData.set('file', dataURItoBlob(imageElement.src));
-        console.log(formData.get("file"))
         xhr.send(formData);
     });
 

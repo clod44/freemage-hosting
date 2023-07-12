@@ -1,0 +1,29 @@
+<style>
+    #loading-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #f0f0f0;
+        position: relative;
+    }
+
+    #loading-bar .progress {
+        height: 100%;
+        position: absolute;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+</style>
+
+<div id="loading-bar">
+    <div class="progress bg-primary"></div>
+</div>
+<script>
+    function updateLoadingBarProgress(progress) {
+        const progressBar = document.querySelector('#loading-bar .progress');
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
+        }
+        console.log(progress)
+    }
+    updateLoadingBarProgress(0); 
+</script>

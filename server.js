@@ -6,7 +6,7 @@ const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
 const slowDown = require('express-slow-down');
-const uploadSpeedLimit = 100; // Specify the desired upload speed limit in kbps
+const uploadSpeedLimit = process.env.UPLOAD_SPEED || 100; // Specify the desired upload speed limit in kbps
 // Calculate the delay in milliseconds based on the desired upload speed
 const delayMs = Math.ceil((8 * 1000) / uploadSpeedLimit); // 8 bits = 1 byte
 const speedLimiter = slowDown({
@@ -54,6 +54,7 @@ app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server upload speed is ${uploadSpeedLimit}kbps`);
 });
 app.get('/', (req, res) => {
     res.render("index")
