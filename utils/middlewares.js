@@ -40,7 +40,7 @@ const rateLimiterPage = rateLimit({
     keyGenerator: (req) => {
         return req.ip;
     },
-    windowMs: 60 * 1000, // 1 minute
+    windowMs: 10 * 1000, // 1 minute
     max: config.PAGE_RATE_LIMIT, // Maximum number of requests per IP address
     handler: (req, res) => {
         res.status(429).json({ error: 'Too many requests' });
