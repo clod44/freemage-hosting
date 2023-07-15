@@ -21,9 +21,20 @@ module.exports = (io) => {
     // Routing
     router.get('/', homeController.renderHomePage);
     router.get('/about', aboutController.renderAboutPage);
-    router.post('/api/upload', middlewares.uploadSpeedLimiter, middlewares.uploadMulter.single('file'), (req, res) => {
-        apiUploadController.handleFileUpload(req, res, io, client, config.DB_NAME, config.COLLECTION_NAME)
+
+    router.post('/api/upload', middlewares.uploadSpeedLimiter, (req, res, next) => {
+        middlewares.uploadMulter.single('file')(req, res, (err) => {
+            if (err) {
+                // Handle multer error if any
+                return res.status(400).json({ error: 'File did not follow upload rules'+err });
+            }
+            // Call the next middleware
+            next();
+        });
+    }, (req, res) => {
+        apiUploadController.handleFileUpload(req, res, io, client, config.DB_NAME, config.COLLECTION_NAME);
     });
+
     router.get('/api/image/:filename', (req, res) => {
         imageController.showImageRaw(req, res, client, config.DB_NAME, config.COLLECTION_NAME);
     });

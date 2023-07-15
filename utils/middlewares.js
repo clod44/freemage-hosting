@@ -16,6 +16,7 @@ const uploadSpeedLimiter = slowDown({
 
 
 
+
 const storage = multer.diskStorage({
     destination: 'uploads/',
     filename: (req, file, cb) => {
@@ -24,7 +25,15 @@ const storage = multer.diskStorage({
         cb(null, uniqueFilename);
     }
 });
-const uploadMulter = multer({ storage: storage });
+
+const uploadMulter = multer({
+    storage,
+    limits: {
+        fileSize: config.MAX_UPLOAD_SIZE * 1024,
+        files: 1
+    },
+});
+
 
 
 const rateLimiterPage = rateLimit({
