@@ -24,6 +24,7 @@ Users can upload their image files to this service and use the generated unique 
   "express-rate-limit": "^6.7.1",
   "express-slow-down": "^1.6.0",
   "http": "^0.0.1-security",
+  "https": "^1.0.0",
   "mongodb": "^5.7.0",
   "multer": "^1.4.5-lts.1",
   "socket.io": "^4.7.1",
@@ -32,20 +33,22 @@ Users can upload their image files to this service and use the generated unique 
 }
 ```
 ## Host your own
- - `git clone https://github.com/clod44/freemage-hosting/ --branch stable-v1.1.0`
+ - `git clone https://github.com/clod44/freemage-hosting/ --branch stable-v2.0.0`
     - use `--branch main` for the latest version and follow the instructions in the `main` branch instead.
  - cd into the folder
  - `npm i`
- - create a `.env` file in the root and fill the values:
+ - create `.env` file in the root and fill the values:
    -  ```env
-      MONGO_URI = //mongodb+srv:// ... //required field
-      DB_NAME = //database name
-      COLLECTION_NAME = //collection name
-      MAX_UPLOAD_SIZE = //max image upload size in kb
-      UPLOAD_SPEED = //max image upload speed kbps
-      PORT = //port number
-      PAGE_RATE_LIMIT = //requests per ip adress per 10 seconds
-      API_RATE_LIMIT = //requests per ip adress per 10 seconds
+      ENABLE_HTTPS=       //true - false
+      HTTP_PORT=          //if https isn't enabled
+      HTTPS_PORT=         //if https is enabled
+      MONGO_URI =         //mongodb+srv:// ... //required field
+      DB_NAME =           //database name
+      COLLECTION_NAME =   //collection name
+      MAX_UPLOAD_SIZE =   //max image upload size in kb
+      UPLOAD_SPEED =      //max image upload speed kbps
+      PAGE_RATE_LIMIT =   //requests per ip adress per 10 seconds
+      API_RATE_LIMIT =    //requests per ip adress per 10 seconds
       ```
    - default values are in the config.js
  - run with `npm start`
@@ -53,6 +56,12 @@ Users can upload their image files to this service and use the generated unique 
    - `npm i pm2 -g`
    - add and start the server with `pm2 start server.js --name <a custom name>`
    - run `pm2 examples` for a general understanding of pm2
+
+## Features
+fill here
+
+## Tips
+[how to make self signed certificate](https://adamtheautomator.com/https-nodejs/)
 
 ## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
   <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
@@ -69,9 +78,4 @@ Users can upload their image files to this service and use the generated unique 
  - [ ] Find a reason to use a lightweight local database
     - but i really liked the idea of not worrying about data losses when updating, restarting or straight up deleting the local repo 🥹
  - [ ] convert to Typescript and take advantage of its abilities instead of writing plain js in .ts file like the last time 💀
- - [X] Use validators like ~~ZOD~~ `yup` for conveinence
- - [X] ~~Image Upload rate per session~~ API access rate per ip
- - [X] ~~Image access rate per session~~ Page access rate per ip
- - [X] Max image upload size
  - [ ] remove exif data in server too
- - [X] Use a modern requesting library like `axios`

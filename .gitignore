@@ -6,3 +6,5 @@ freemage-hosting.pem
 uploads/
 .env
 logs/*
+ssl/*
+!ssl/.gitkeep
