@@ -60,16 +60,17 @@ Users can upload their image files to this service and use the generated unique 
 ## Features
 fill here
 
-## Tips
-[how to make self signed certificate](https://adamtheautomator.com/https-nodejs/)
+#### Tips
+ - [how to make self signed ssl certificate](https://adamtheautomator.com/https-nodejs/)
 
 ## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
   <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
 
 ## About Versions
- - `main` branch will hold the latest stable version with patches.
- - `stable-v*` branches are stable archives.
- - `dev` branch holds the latest work-in-progress version.
+ - `main` : has the latest stable version
+ - `stable-v*` : stable/completed versions
+ - `dev-v*` : work-in-progress versions
+ - `dev` : playground
 
 ## Known Bugs
  - Rotated images at file picking especially in apple devices. possibly caused by deletion of exif data.
