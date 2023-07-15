@@ -1,3 +1,4 @@
+const yup = require('yup');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,6 +21,21 @@ const showImageRaw = async (req, res, client, dbName, collectionName) => {
             return;
         }
 
+        ///// Validate Data
+        const dataSchema = yup.object().shape({
+            createdAt: yup.date().required(),
+            seenBy: yup.number().integer().min(0).default(0),
+            lastSeenAt: yup.date().default(() => new Date()),
+            originalFilename: yup.string().required(),
+            uniqueFilename: yup.string().required(),
+        });
+        dataSchema.validate(mappingData.value)
+            .catch(error => {
+                console.error('Data validation failed:', error.message)
+                console.log(mappingData.value);
+                return;
+            });
+            
         const originalFilename = mappingData.value.originalFilename;
         const filePath = path.resolve(__dirname, '..', 'uploads', originalFilename);
 
