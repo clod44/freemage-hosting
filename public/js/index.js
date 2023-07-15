@@ -1,4 +1,5 @@
 
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const fileInput = document.getElementById('select-image');
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
         // Check if a file is selected
         if (!fileInput.files || fileInput.files.length === 0) {
@@ -51,44 +52,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         alreadyUploading = true
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/upload');
-        // Track the progress of the upload
-        xhr.upload.addEventListener('progress', function (event) {
-            fileInput.disabled = true
-            submitBtn.disabled = true
-            if (event.lengthComputable) {
-                const progress = (event.loaded / event.total) * 100;
-                updateLoadingBarProgress(progress);
-            }
-        });
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    if (xhr.getResponseHeader('Content-Type').indexOf('application/json') !== -1) {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.redirectUrl) {
-                            window.location.href = response.redirectUrl;
-                        } else {
-                            console.error('Missing redirect URL in the response');
-                        }
-                    } else {
-                        console.error('Invalid response format, expecting JSON');
-                    }
-                } else {
-                    const errorResponse = JSON.parse(xhr.responseText);
-                    const errorMessage = errorResponse.error;
-                    console.error(errorMessage);
-                    alert(errorMessage);
-                }
-            }
-            updateLoadingBarProgress(0)
-            alreadyUploading = false
-        };
+        fileInput.disabled = true;
+        submitBtn.disabled = true;
 
-        const formData = new FormData(form);
-        formData.set('file', dataURItoBlob(imageElement.src));
-        xhr.send(formData);
+
+        try {
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await axios.post('/api/upload', formData, {
+                onUploadProgress: function (progressEvent) {
+                    const progress = (progressEvent.loaded / progressEvent.total) * 100;
+                    updateLoadingBarProgress(progress);
+
+                }
+            });
+
+            if (response.data.redirectUrl) {
+                window.location.href = response.data.redirectUrl;
+            } else {
+                console.error('Missing redirect URL in the response');
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert('An error occurred while uploading the file.');
+        } finally {
+            updateLoadingBarProgress(0);
+            alreadyUploading = false;
+            fileInput.disabled = false;
+            submitBtn.disabled = false;
+        }
+
     });
 
     function dataURItoBlob(dataURI) {
