@@ -7,6 +7,9 @@
 <hr>
 
 ## What does it do
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/20664a48d2c04074881086797693207d)](https://app.codacy.com/gh/clod44/freemage-hosting?utm_source=github.com&utm_medium=referral&utm_content=clod44/freemage-hosting&utm_campaign=Badge_Grade)
+
 Users can upload their image files to this service and use the generated unique url to access the raw image file later on:
  - `<websiteurl>/api/image/<generated image name>.<image format>`
  - `http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:2999/api/image/8799c5e9-9fb8-4588-9a70-be0dcdd45b35.jpg`
