@@ -32,11 +32,11 @@ Users can upload their image files to this service and use the generated unique 
 }
 ```
 ## Host your own
- - `git clone https://github.com/clod44/freemage-hosting/`
+ - `git clone https://github.com/clod44/freemage-hosting/` (latest stable)
  - cd into the folder
  - `npm i`
  - create a `.env` file in the root and fill the values:
-   - ```env
+   -  ```env
       MONGO_URI = //mongodb+srv:// ... //required field
       DB_NAME = //database name
       COLLECTION_NAME = //collection name
@@ -45,6 +45,7 @@ Users can upload their image files to this service and use the generated unique 
       PORT = //port number
       PAGE_RATE_LIMIT = //requests per ip adress per 10 seconds
       API_RATE_LIMIT = //requests per ip adress per 10 seconds
+      ```
    - default values are in the config.js
  - run with `npm start`
  - (optional) install pm2 to run it in background
