@@ -17,20 +17,19 @@ Users can upload their image files to this service and use the generated unique 
 
 ## Dependencies
 ```json
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-rate-limit": "^6.7.1",
-    "express-slow-down": "^1.6.0",
-    "http": "^0.0.1-security",
-    "mongodb": "^5.7.0",
-    "multer": "^1.4.5-lts.1",
-    "piexif": "^0.0.2",
-    "socket.io": "^4.7.1",
-    "uuid": "^9.0.0",
-    "yup": "^1.2.0"
-  }
+"dependencies": {
+  "dotenv": "^16.3.1",
+  "ejs": "^3.1.9",
+  "express": "^4.18.2",
+  "express-rate-limit": "^6.7.1",
+  "express-slow-down": "^1.6.0",
+  "http": "^0.0.1-security",
+  "mongodb": "^5.7.0",
+  "multer": "^1.4.5-lts.1",
+  "socket.io": "^4.7.1",
+  "uuid": "^9.0.0",
+  "yup": "^1.2.0"
+}
 ```
 ## Host your own
  - `git clone https://github.com/clod44/freemage-hosting/`
