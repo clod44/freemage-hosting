@@ -32,7 +32,7 @@ connectToMongoDB()
 //server listen
 server.listen(config.PORT, () => {
     console.log(`Server is listening on port ${config.PORT}`);
-    console.log(`Serve upload speed limit: ${config.UPLOAD_SPEED}`);
+    console.log(`Serve upload speed limit: ${config.UPLOAD_SPEED}kbps`);
 });
 
 
