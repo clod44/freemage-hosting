@@ -10,7 +10,7 @@
         const progressLabel = progressBar.querySelector('p');
         progressBar.style.width = progress + '%';
         if(progress < 99){
-            progressLabel.textContent = progress + '%';
+            progressLabel.textContent = Math.ceil(progress) + '%';
         }else{
             progressLabel.textContent = "Please Wait...";
         }
