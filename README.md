@@ -8,30 +8,45 @@
 
 ## What does it do
 Users can upload their image files to this service and use the generated unique url to access the raw image file later on:
- - `<websiteurl>/image/<generated image name>.<image format>`
+ - `<websiteurl>/api/image/<generated image name>.<image format>`
  - [http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg)
  - generated link can be used to embed images
  - <img src="http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg" height=64px alt="embedded image. if you are seeing this that means my test server is down">
  - Image's exif data(jpg exif) is removed on client side before uploading process starts
  - Uploaded images DO NOT gets deleted after 24 hours. i didn't implement it and forgor to change the frontend 💀
-## Major Depencies
- - [x] express
- - [X] nodejs
- - [X] mongodb - image information storing
- - [X] multer - image uploading
- - [X] piexif - exif manipulation 
- - and others in `package.json`  
+
+## Dependencies
+```json
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.1",
+    "express-slow-down": "^1.6.0",
+    "http": "^0.0.1-security",
+    "mongodb": "^5.7.0",
+    "multer": "^1.4.5-lts.1",
+    "piexif": "^0.0.2",
+    "socket.io": "^4.7.1",
+    "uuid": "^9.0.0",
+    "yup": "^1.2.0"
+  }
+```
 ## Host your own
  - `git clone https://github.com/clod44/freemage-hosting/`
  - cd into the folder
  - `npm i`
  - create a `.env` file in the root and fill the values:
    - ```env
-      PORT=#port number
-      MONGO_URI=#mongodb+srv link
-      DB_NAME=#database name
-      COLLECTION_NAME=#collection name for upload informations
-      UPLOAD_SPEED=#upload speed in kbps example: 300 ```
+      MONGO_URI = //mongodb+srv:// ... 
+      DB_NAME = //database name
+      COLLECTION_NAME = //collection name
+      MAX_UPLOAD_SIZE = //max image upload size in kb
+      UPLOAD_SPEED = //max image upload speed kbps
+      PORT = //port number
+      PAGE_RATE_LIMIT = //requests per ip adress per 10 seconds
+      API_RATE_LIMIT = //requests per ip adress per 10 seconds
+   - default values are in the config.js
  - run with `npm start`
  - (optional) install pm2 to run it in background
    - `npm i pm2 -g`
@@ -48,9 +63,9 @@ Users can upload their image files to this service and use the generated unique 
  - [ ] Find a reason to use a lightweight local database
     - but i really liked the idea of not worrying about data losses when updating, restarting or straight up deleting the local repo 🥹
  - [ ] convert to Typescript and take advantage of its abilities instead of writing plain js in .ts file like the last time 💀
- - [ ] Use validators like ZOD for conveinence
- - [ ] Image Upload rate per session
- - [ ] Image access rate per session
- - [ ] Max image upload size
+ - [X] Use validators like ~~ZOD~~ `yup` for conveinence
+ - [X] ~~Image Upload rate per session~~ API access rate per ip
+ - [X] ~~Image access rate per session~~ Page access rate per ip
+ - [X] Max image upload size
  - [ ] remove exif data in server too
- - [ ] use fetch api for post request with a library like axios to show upload progress
+ - [X] Use a modern requesting library like `axios`
