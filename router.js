@@ -6,7 +6,7 @@ module.exports = (io) => {
     const aboutController = require('./controllers/aboutController');
     const errorController = require('./controllers/errorController');
     const apiUploadController = require('./controllers/apiUploadController');
-    const imageController = require('./controllers/imageController');
+    const imageController = require('./controllers/apiImageController');
     const middlewares = require('./utils/middlewares');
     const config = require('./config');
 
