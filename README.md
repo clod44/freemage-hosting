@@ -9,7 +9,7 @@
 ## What does it do
 Users can upload their image files to this service and use the generated unique url to access the raw image file later on:
  - `<websiteurl>/api/image/<generated image name>.<image format>`
- - `http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/image/7e4d4eab-ddd3-4b91-b6ab-2042df461fa3.jpeg`
+ - `http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/api/image/8799c5e9-9fb8-4588-9a70-be0dcdd45b35.jpg`
  - generated link can be used to embed images
  - <img src="http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/api/image/8799c5e9-9fb8-4588-9a70-be0dcdd45b35.jpg" height=64px alt="embedded image. if you are seeing this that means either my test server is down or you are viewing an old version of the project">
  - Image's exif data(jpg exif) is removed on client side before uploading process starts
