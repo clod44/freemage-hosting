@@ -12,6 +12,25 @@ function getUploadedImageCount() {
     }
 }
 let uploadedImageCount = getUploadedImageCount()
+
+
+
+function c(text="", err = false) {
+    if(text.length == 0) {
+        console.log()
+        return;
+    }
+    const currentDate = new Date().toLocaleString();
+    const logMessage = `[${currentDate}] : ${text}`;
+    if(err){
+        console.error(logMessage);
+    }else{
+        console.log(logMessage);
+    }
+}
+
+
 module.exports = {
+    c,
     uploadedImageCount
 };

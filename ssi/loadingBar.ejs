@@ -9,9 +9,11 @@
         const progressBar = document.getElementById('uploading-progress-bar');
         const progressLabel = progressBar.querySelector('p');
         progressBar.style.width = progress + '%';
-        progressLabel.textContent = progress + '%';
-        
-        console.log(progress)
+        if(progress < 99){
+            progressLabel.textContent = progress + '%';
+        }else{
+            progressLabel.textContent = "Please Wait...";
+        }
     }
     updateLoadingBarProgress(0); 
 </script>

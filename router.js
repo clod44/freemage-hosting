@@ -13,24 +13,22 @@ module.exports = (io) => {
 
     const { client } = require('./db');
 
+    //limit max requests. 
+    //ORDER MATTERS! first check if "/" rate limit is reached, then check if ...
+    router.use('/', middlewares.rateLimiterPage)
+    router.use('/api', middlewares.rateLimiterApi)
 
-    // Home page route
+    // Routing
     router.get('/', homeController.renderHomePage);
-
-    // About page route
     router.get('/about', aboutController.renderAboutPage);
-
-    //api image upload
-    router.post('/api/upload', middlewares.speedLimiter, middlewares.upload.single('file'), (req, res) => {
+    router.post('/api/upload', middlewares.uploadSpeedLimiter, middlewares.uploadMulter.single('file'), (req, res) => {
         apiUploadController.handleFileUpload(req, res, io, client, config.DB_NAME, config.COLLECTION_NAME)
     });
-
-    //show image raw
-    router.get('/image/:filename', (req, res) => {
+    router.get('/api/image/:filename', (req, res) => {
         imageController.showImageRaw(req, res, client, config.DB_NAME, config.COLLECTION_NAME);
     });
 
-    // error page route (redirecting to a random endpoint like /asjdfhg or /error [which doesnt exist] will redirect to error page)
+    // error page route (redirecting to a random endpoint like /asjdfhg or /error [which doesnt exist] will redirect to notFound page)
     router.get(errorController.renderErrorPage);
 
     return router;

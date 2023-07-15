@@ -3,11 +3,11 @@ const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const config = require('../config')
-
+const rateLimit = require('express-rate-limit');
 
 // Calculate the delay in milliseconds based on the desired upload speed
 const delayMs = Math.ceil((8 * 1000) / config.UPLOAD_SPEED); // 8 bits = 1 byte
-const speedLimiter = slowDown({
+const uploadSpeedLimiter = slowDown({
     windowMs: delayMs,
     delayAfter: 1, // Delay after the first request
     delayMs,
@@ -24,12 +24,37 @@ const storage = multer.diskStorage({
         cb(null, uniqueFilename);
     }
 });
-const upload = multer({ storage: storage });
+const uploadMulter = multer({ storage: storage });
 
+
+const rateLimiterPage = rateLimit({
+    keyGenerator: (req) => {
+        return req.ip;
+    },
+    windowMs: 60 * 1000, // 1 minute
+    max: config.PAGE_RATE_LIMIT, // Maximum number of requests per IP address
+    handler: (req, res) => {
+        res.status(429).json({ error: 'Too many requests' });
+    },
+});
+
+
+const rateLimiterApi = rateLimit({
+    keyGenerator: (req) => {
+        return req.ip;
+    },
+    windowMs: 60 * 1000, // 1 minute
+    max: config.API_RATE_LIMIT, // Maximum number of requests per IP address
+    handler: (req, res) => {
+        res.status(429).json({ error: 'Too many Image requests per minute. please wait a minute' });
+    },
+});
 
 
 // Export the router
 module.exports = {
-    speedLimiter,
-    upload
+    rateLimiterPage,
+    rateLimiterApi,
+    uploadSpeedLimiter,
+    uploadMulter
 };
