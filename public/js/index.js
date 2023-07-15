@@ -75,8 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Missing redirect URL in the response');
             }
         } catch (error) {
-            console.error('Error uploading file:', error);
-            alert('An error occurred while uploading the file.');
+            console.log(error.message)
+            console.log(error.response.data.error)
+            showModal('An error occurred while uploading the file.', error.response.data.error);
         } finally {
             updateLoadingBarProgress(0);
             alreadyUploading = false;

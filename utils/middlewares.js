@@ -43,7 +43,7 @@ const rateLimiterPage = rateLimit({
     windowMs: 10 * 1000, // 1 minute
     max: config.PAGE_RATE_LIMIT, // Maximum number of requests per IP address
     handler: (req, res) => {
-        res.status(429).json({ error: 'Too many requests' });
+        res.status(429).json({ error: 'Too many requests.' });
     },
 });
 
@@ -55,7 +55,7 @@ const rateLimiterApi = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: config.API_RATE_LIMIT, // Maximum number of requests per IP address
     handler: (req, res) => {
-        res.status(429).json({ error: 'Too many Image requests per minute. please wait a minute' });
+        res.status(429).json({ error: 'Too many Image requests per minute.' });
     },
 });
 

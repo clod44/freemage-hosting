@@ -26,7 +26,7 @@ module.exports = (io) => {
         middlewares.uploadMulter.single('file')(req, res, (err) => {
             if (err) {
                 // Handle multer error if any
-                return res.status(400).json({ error: 'File did not follow upload rules'+err });
+                return res.status(400).json({ error: 'File did not follow upload rules : '+err });
             }
             // Call the next middleware
             next();
