@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const https = require('https');
-
+const { version } = require('./package.json')
 const router = require('./router');
 const socketController = require('./controllers/socketController');
 const { connectToMongoDB } = require('./db');
@@ -38,6 +38,7 @@ if (config.ENABLE_HTTPS) {
     //start actual server
     httpsServer.listen(config.HTTPS_PORT, () => {
         console.log()
+        console.log(`Freemage Hosting ${version}`)
         console.log(`HTTPS Server is listening on port ${config.HTTPS_PORT}`)
         console.log(`Server upload speed limit: ${config.UPLOAD_SPEED}kbps`)
         console.log(`Server api rate limit: ${config.API_RATE_LIMIT * 6} per minute`)
@@ -58,6 +59,7 @@ if (config.ENABLE_HTTPS) {
 
     httpServer.listen(config.HTTP_PORT, () => {
         console.log()
+        console.log(`Freemage Hosting ${version}`)
         console.log(`HTTP Server is listening on port ${config.HTTP_PORT}`)
         console.log(`Server upload speed limit: ${config.UPLOAD_SPEED}kbps`)
         console.log(`Server api rate limit: ${config.API_RATE_LIMIT * 6} per minute`)

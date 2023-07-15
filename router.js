@@ -6,6 +6,7 @@ module.exports = (io) => {
     const aboutController = require('./controllers/aboutController');
     const errorController = require('./controllers/errorController');
     const apiUploadController = require('./controllers/apiUploadController');
+    const apiVersionController = require('./controllers/apiVersionController');
     const imageController = require('./controllers/apiImageController');
     const middlewares = require('./utils/middlewares');
     const config = require('./config');
@@ -21,6 +22,7 @@ module.exports = (io) => {
     // Routing
     router.get('/', homeController.renderHomePage);
     router.get('/about', aboutController.renderAboutPage);
+    router.get('/api/version', apiVersionController.getVersion);
 
     router.post('/api/upload', middlewares.uploadSpeedLimiter, (req, res, next) => {
         middlewares.uploadMulter.single('file')(req, res, (err) => {
