@@ -38,7 +38,7 @@ Users can upload their image files to this service and use the generated unique 
  - `npm i`
  - create a `.env` file in the root and fill the values:
    - ```env
-      MONGO_URI = //mongodb+srv:// ... 
+      MONGO_URI = //mongodb+srv:// ... //required field
       DB_NAME = //database name
       COLLECTION_NAME = //collection name
       MAX_UPLOAD_SIZE = //max image upload size in kb
