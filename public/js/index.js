@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.data.redirectUrl) {
                 window.location.href = response.data.redirectUrl;
+                updateLoadingBarProgress(100, "Redirecting...");
             } else {
                 console.error('Missing redirect URL in the response');
             }
@@ -79,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(error.response.data.error)
             showModal('An error occurred while uploading the file.', error.response.data.error);
         } finally {
-            updateLoadingBarProgress(0);
             alreadyUploading = false;
             fileInput.disabled = false;
             submitBtn.disabled = false;

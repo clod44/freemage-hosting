@@ -5,7 +5,7 @@
     </div>
 </div>
 <script>
-    function updateLoadingBarProgress(progress) {
+    function updateLoadingBarProgress(progress, text="") {
         progress = Math.max(0, Math.min(100,progress))
         const progressBar = document.getElementById('uploading-progress-bar');
         const progressLabel = progressBar.querySelector('p');
@@ -14,6 +14,9 @@
             progressLabel.textContent = Math.ceil(progress) + '%';
         }else{
             progressLabel.textContent = "Please Wait...";
+        }
+        if(text.length > 0){
+            progressLabel.textContent = text
         }
     }
     updateLoadingBarProgress(0); 
