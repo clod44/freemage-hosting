@@ -1,7 +1,6 @@
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 let { uploadedImageCount } = require('../utils/utils')
-const { c } = require('../utils/utils')
 
 
 const handleFileUpload = async (req, res, io, client, dbName, collectionName) => {
@@ -30,17 +29,17 @@ const handleFileUpload = async (req, res, io, client, dbName, collectionName) =>
 
     try {
         await collection.insertOne(mappingData);
-        c('Mapping data stored in MongoDB');
+        console.log('Mapping data stored in MongoDB');
         uploadedImageCount++;
         io.emit('uploadedImageCount', uploadedImageCount);
     } catch (err) {
-        c('Error storing mapping in MongoDB: ', err);
+        console.log('Error storing mapping in MongoDB: ', err);
     }
 
     // Handle the uploaded file here
-    c('Original Filename: '+ originalFilename);
-    c('Saved Filename: '+ uniqueFilename);
-    c()
+    console.log('Original Filename: '+ originalFilename);
+    console.log('Saved Filename: '+ uniqueFilename);
+    console.log()
 
     res.status(200).json({ redirectUrl: `/api/image/${uniqueFilename}` });
 };

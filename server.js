@@ -2,11 +2,11 @@ const config = require('./config');
 const path = require('path');
 const express = require('express');
 const http = require('http');
-const { c } = require('./utils/utils')
 
 const router = require('./router');
 const socketController = require('./controllers/socketController');
 const { connectToMongoDB } = require('./db');
+const { uploadedImageCount } = require('./utils/utils');
 
 
 const app = express();
@@ -33,11 +33,12 @@ connectToMongoDB()
 
 //server listen
 server.listen(config.PORT, () => {
-    c();
-    c(`Server is listening on port ${config.PORT}`)
-    c(`Serve upload speed limit: ${config.UPLOAD_SPEED}kbps`)
-    c(`Serve api rate limit: ${config.API_RATE_LIMIT}kbps`)
-    c();
+    console.log()
+    console.log(`Server is listening on port ${config.PORT}`)
+    console.log(`Serve upload speed limit: ${config.UPLOAD_SPEED}kbps`)
+    console.log(`Serve api rate limit: ${config.API_RATE_LIMIT*6} per minute`)
+    console.log(`Images in Filesystem: ${uploadedImageCount}`)
+    console.log();
 });
 
 
