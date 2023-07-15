@@ -6,6 +6,7 @@
 </div>
 <script>
     function updateLoadingBarProgress(progress) {
+        progress = Math.max(0, Math.min(100,progress))
         const progressBar = document.getElementById('uploading-progress-bar');
         const progressLabel = progressBar.querySelector('p');
         progressBar.style.width = progress + '%';
