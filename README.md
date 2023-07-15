@@ -33,6 +33,7 @@ Users can upload their image files to this service and use the generated unique 
 ```
 ## Host your own
  - `git clone https://github.com/clod44/freemage-hosting/ --branch stable-v1.1.0`
+    - use `--branch main` for the latest version and follow the instructions in the `main` branch instead.
  - cd into the folder
  - `npm i`
  - create a `.env` file in the root and fill the values:
