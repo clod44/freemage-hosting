@@ -39,20 +39,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        if (alreadyUploading) {   //just in case
-            showModal("Please Wait", "Please wait until the previous upload is completed")
-            return
-        }
-        alreadyUploading = true
-
         // Check if a file is selected
         if (!fileInput.files || fileInput.files.length === 0) {
-            alert('Please select an image file.');
-
             showModal('Missing file', '<p>Please Select an image file</p>');
             return;
         }
 
+        if (alreadyUploading) {   //just in case
+            showModal("Please Wait", "Please wait until the previous upload is completed")
+            return
+        }
+
+        alreadyUploading = true
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/api/upload');
         // Track the progress of the upload
