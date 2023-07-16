@@ -7,10 +7,10 @@
 <hr>
 
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fclod44%2Ffreemage-hosting%2Fmain%2Fpackage.json&query=%24.version&label=version)
-
+![Website](https://img.shields.io/website?url=http%3A%2F%2Fec2-3-8-184-85.eu-west-2.compute.amazonaws.com%3A2999&label=website)
 ![Known Vulnerabilities](https://snyk.io/test/github/clod44/freemage-hosting/badge.svg)
+![Codacy branch grade](https://img.shields.io/codacy/grade/65e3a4002ee747a5af0e54aaef3a015b/main)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a17cb028c594405e9235c724d6b45b50)](https://app.codacy.com/app/ZoranPandovski/BookingScraper?utm_source=github.com&utm_medium=referral&utm_content=ZoranPandovski/BookingScraper&utm_campaign=badger)
 
 ## What does it do
 Users can upload their image files to this service and use the generated unique url to access the raw image file later on:
