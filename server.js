@@ -23,8 +23,8 @@ app.use(express.static('public'));
 if (config.ENABLE_HTTPS) {
     // Create HTTPS server
     const options = {
-        key: fs.readFileSync(path.resolve(__dirname, 'ssl', 'private-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'ssl', 'certificate.pem')),
+        key: fs.readFileSync(path.resolve(__dirname, 'ssl', 'private-key.key')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'ssl', 'certificate.crt')),
     };
     const httpsServer = https.createServer(options, app);
     const httpsIo = require('socket.io')(httpsServer);

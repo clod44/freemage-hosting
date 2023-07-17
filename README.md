@@ -62,7 +62,7 @@ Users can upload their image files to this service and use the generated unique 
    - `npm i pm2 -g`
    - add and start the server with `pm2 start server.js --name <a custom name>`
    - run `pm2 examples` for a general understanding of pm2
-
+ - https option expects `private-key.key` and `certificate.crt` files in `ssl` folder
 ## Features
 fill here
 
