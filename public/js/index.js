@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function isAcceptedExtension(filename) {
-        const acceptedExtensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+        const acceptedExtensions = ['jpg', 'jpeg', 'png'];
         const fileExtension = filename.split('.').pop().toLowerCase();
         return acceptedExtensions.includes(fileExtension);
     }
