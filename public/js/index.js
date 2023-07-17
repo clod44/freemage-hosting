@@ -17,8 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         const reader = new FileReader();
         reader.onload = (e) => {
-            const cleanImage = isJpegOrJpg(file.name) ? piexif.remove(e.target.result) : e.target.result;
-            imageElement.src = cleanImage;
+            let imageDataUrl;
+            if(isJpegOrJpg(file.name)){
+                imageDataUrl = piexif.remove(e.target.result);
+            }else{
+                imageDataUrl = URL.createObjectURL(e.target.result);
+            }
+            imageElement.src = imageDataUrl;
             updateLoadingBarProgress(0);
         };
         reader.readAsDataURL(file);
@@ -57,9 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         try {
-            const file = fileInput.files[0];
+            //const file1 = fileInput.files[0];
+            const file2 = dataURItoBlob(imageElement.src) //exif removed file
             const formData = new FormData();
-            formData.append('file', file);
+            formData.set('file', file2);
 
             const response = await axios.post('/api/upload', formData, {
                 onUploadProgress: function (progressEvent) {
