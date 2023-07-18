@@ -69,7 +69,7 @@ fill here
 #### Tips
  - [how to make self signed ssl certificate](https://adamtheautomator.com/https-nodejs/)
 
-## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:3000/)
+## [Website](http://ec2-3-8-184-85.eu-west-2.compute.amazonaws.com:2999/)
   <img src="https://github.com/clod44/freemage-hosting/blob/main/screenshots/home.PNG?raw=true" width="100%">
 
 ## About Versions
