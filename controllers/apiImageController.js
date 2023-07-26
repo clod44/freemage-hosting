@@ -44,7 +44,7 @@ const showImageRaw = async (req, res, client, dbName, collectionName) => {
                 console.log('Error accessing file:' + err);
                 //res.status(404).json({error:'Image not found in the filesystem'});
                 //res.status(404).sendFile(path.join(__dirname, 'public', 'pageNotFound.html'));
-                res.status(404).redirect("/error"); //some random endpoint to redirect to * error endpoint
+                res.status(404).redirect("/error?" + err); //some random endpoint to redirect to * error endpoint
             } else {
                 res.status(200).sendFile(filePath);
             }
