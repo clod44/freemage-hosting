@@ -11,7 +11,7 @@ const COLLECTION_NAME = process.env.COLLECTION_NAME || 'image-mapping';
 const MAX_UPLOAD_SIZE = parseInt(process.env.MAX_UPLOAD_SIZE) || 5120; //kb
 const UPLOAD_SPEED = parseInt(process.env.UPLOAD_SPEED) || 500; //kbps
 const PAGE_RATE_LIMIT = parseInt(process.env.PAGE_RATE_LIMIT) || 7; //requests per ip adress per 10 seconds
-const API_RATE_LIMIT = parseInt(process.env.API_RATE_LIMIT) || 3; //requests per ip adress per 10 seconds
+const API_RATE_LIMIT = parseInt(process.env.API_RATE_LIMIT) || 7; //requests per ip adress per 10 seconds
 
 module.exports = {
     HTTP_PORT,
