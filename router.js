@@ -50,7 +50,7 @@ module.exports = (io) => {
     });
 
     // error page route (redirecting to a random endpoint like /asjdfhg or /error [which doesnt exist] will redirect to notFound page)
-    router.get(errorController.renderErrorPage);
+    router.get("/*", errorController.renderErrorPage);
 
     return router;
 };
