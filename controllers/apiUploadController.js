@@ -41,11 +41,11 @@ const handleFileUpload = async (req, res, io, client, dbName, collectionName) =>
     console.log('Saved to Database as: ' + uniqueFilename);
     console.log()
 
-    const rawImageURL = `${req.protocol}://${req.get('host')}/api/image/${uniqueFilename}.jpg`;
+    const rawImageUrl = `${req.protocol}://${req.get('host')}/api/image/${uniqueFilename}.jpg`;
 
     res.status(200).json({
         redirectUrl: `/api/image/${uniqueFilename}`,
-        rawImageURL: rawImageURL
+        rawImageUrl: rawImageUrl
     });
 };
 

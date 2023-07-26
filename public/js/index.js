@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            if (response.data.redirectUrl) {
+            if (response.status == 200) {
+                console.log(response.data)
                 window.location.href = response.data.redirectUrl;
                 updateLoadingBarProgress(100, "Redirecting...");
             } else {
