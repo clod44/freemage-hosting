@@ -19,7 +19,7 @@ const showImageRaw = async (req, res, client, dbName, collectionName) => {
         if (mappingData.ok != 1) {
             //res.status(404).json({error:'Image url not found in database'});
             //res.status(404).sendFile(path.join(__dirname, 'public', 'pageNotFound.html'));
-            res.redirect("/error"); //some random endpoint to redirect to * error endpoint
+            res.status(500).redirect("/error"); //some random endpoint to redirect to * error endpoint
             return;
         }
 
@@ -37,26 +37,27 @@ const showImageRaw = async (req, res, client, dbName, collectionName) => {
                 c('Data validation failed:', error.message, true)
                 return;
             });
-            
+
         const originalFilename = mappingData.value.originalFilename;
+        const uniqueFilename = mappingData.value.uniqueFilename;
         const filePath = path.resolve(__dirname, '..', 'uploads', originalFilename);
 
         // Check if the file exists in the filesystem
         fs.access(filePath, fs.constants.F_OK, (err) => {
             if (err) {
-                c('Error accessing file:'+ err);
+                c('Error accessing file:' + err);
                 //res.status(404).json({error:'Image not found in the filesystem'});
                 //res.status(404).sendFile(path.join(__dirname, 'public', 'pageNotFound.html'));
-                res.redirect("/error"); //some random endpoint to redirect to * error endpoint
+                res.status(404).redirect("/error"); //some random endpoint to redirect to * error endpoint
             } else {
-                res.sendFile(filePath);
+                res.status(200).sendFile(filePath);
             }
         });
     } catch (err) {
         c('Error retrieving mapping from MongoDB:' + err, true);
         //res.status(500).send('Internal Server Error. Cant communicate with the database');
         //res.status(500).sendFile(path.join(__dirname, 'public', 'pageNotFound.html'));
-        res.redirect("/error"); //some random endpoint to redirect to * error endpoint
+        res.status(404).redirect("/error"); //some random endpoint to redirect to * error endpoint
     }
 };
 
