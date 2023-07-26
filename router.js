@@ -19,6 +19,14 @@ module.exports = (io) => {
     router.use('/', middlewares.rateLimiterPage)
     router.use('/api', middlewares.rateLimiterApi)
 
+    //Just allow the CORS thing
+    router.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        next();
+    });
+
     // Routing
     router.get('/', homeController.renderHomePage);
     router.get('/about', aboutController.renderAboutPage);
@@ -28,7 +36,7 @@ module.exports = (io) => {
         middlewares.uploadMulter.single('file')(req, res, (err) => {
             if (err) {
                 // Handle multer error if any
-                return res.status(400).json({ error: 'File did not follow upload rules : '+err });
+                return res.status(400).json({ error: 'File did not follow upload rules : ' + err });
             }
             // Call the next middleware
             next();

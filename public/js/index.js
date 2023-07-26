@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const reader = new FileReader();
         reader.onload = (e) => {
             let imageDataUrl;
-            if(isJpegOrJpg(file.name)){
+            if (isJpegOrJpg(file.name)) {
                 imageDataUrl = piexif.remove(e.target.result);
-            }else{
+            } else {
                 imageDataUrl = URL.createObjectURL(e.target.result);
             }
             imageElement.src = imageDataUrl;
